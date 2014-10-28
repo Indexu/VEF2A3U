@@ -276,6 +276,13 @@ body{
 }
 
 
+/* -- Upload -- */
+#drop_zone{
+	padding: 1em 2em;
+	border: 2px dotted rgb(50,50,50);
+	text-align: center;
+}
+
 
 /* --- Tablets --- */
 @media only screen and (max-width: 64.063em) {

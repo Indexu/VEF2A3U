@@ -19,19 +19,22 @@ include('includes/login.php');
 </head>
 <body>
 
-	<?php
+	<?php include('includes/loggedInHeader.php'); ?>
 
-		if(check_login()){
-			include('includes/loggedInHeader.php');
-			include('includes/frontLoggedIn.php');
-		}
+	<div class="row firstRow">
+		<div class="medium-8 columns centered">
 
-		else{
-			include('includes/noLoginHeader.php');
-			include('includes/frontNoLogin.php');
-		}
+			<form id="uploadForm" method="post" action="" enctype="multipart/form-data" >
+				<div class="large-6 columns">
+					<!--<input type="file" name="files[]" id="files" multiple />-->
+					<div id="drop_zone">Drop files here</div>
+				</div>
 
-	?>
+				<output id="list"></output>
+			</form>
+
+		</div>
+	</div>
 
 	<?php include('includes/footer.php'); ?>
 	

@@ -37,20 +37,47 @@ $( document ).ready(function() {
 		$("html, body").animate({ scrollTop: $('#frontImages').offset().top }, 1000);
 	});
 
-	/* Login form */
-	$('.loginButton').click(function(e){
-		//e.preventDefault();
+	/* ========= Upload ============ */
 
-		/*
-		var email = $('.loginEmail').val();
-		var pass = $('.loginPass').val();
+	// CREDIT: http://www.html5rocks.com/en/tutorials/file/dndfiles/
 
-		if(email == ""){
-			$('.alert-box').slideDown(500, function(){
+	// Handle files
+	function handleFileSelect(event){
+		// Stop prop and prevent default
+		event.stopPropagation();
+		event.preventDefault();
 
-			});
-		}*/
-	});
+		// Files
+		var files = event.dataTransfer.files;
+
+		// Output
+		var output = [];
+
+		for (var i = 0, f; f = files[i]; i++) {
+			output.push('<li><strong>', escape(f.name), '</strong> (',
+						f.type || 'n/a', ') - ',
+							f.size, ' bytes, last modified: ',
+							f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
+						'</li>');
+		}
+
+		$('#list')[0].innerHTML = '<ul>' + output.join('') + '</ul>';
+
+	}
+
+	// Drag n drop
+	function handleDragOver(event){
+		event.stopPropagation();
+		event.preventDefault();
+		event.dataTransfer.dropEffect = 'copy';
+	}
+
+	// The drop zone
+	var dropZone = $('#drop_zone')[0];
+
+	// Listeners
+	dropZone.addEventListener('dragover', handleDragOver, false);
+	dropZone.addEventListener('drop', handleFileSelect, false);
 
 	
 });
