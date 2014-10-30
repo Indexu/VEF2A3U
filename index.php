@@ -19,19 +19,23 @@ include('includes/login.php');
 </head>
 <body>
 
-	<?php
+	<div class="wrapper">
+		<?php
 
-		if(check_login()){
-			include('includes/loggedInHeader.php');
-			include('includes/frontLoggedIn.php');
-		}
+			if(check_login()){
+				include('includes/loggedInHeader.php');
+				include('includes/frontLoggedIn.php');
+			}
 
-		else{
-			include('includes/noLoginHeader.php');
-			include('includes/frontNoLogin.php');
-		}
+			else{
+				include('includes/noLoginHeader.php');
+				include('includes/frontNoLogin.php');
+			}
 
-	?>
+		?>
+		
+	</div>
+	
 
 	<?php include('includes/footer.php'); ?>
 	

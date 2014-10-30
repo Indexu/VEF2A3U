@@ -1,56 +1,46 @@
 <?php
+if(!isset($_SESSION)) 
+{ 
+	session_start(); 
+}
+
 $max = 2048000;
 # Localhost
-//$destination = trim($_SERVER['DOCUMENT_ROOT'] . "/vef2a/verkefni1/userImg/" . $_SESSION['user']['email'] . '/');
+$destination = trim($_SERVER['DOCUMENT_ROOT'] . "/vef2a/final/VEF2A3U/userImg/" . $_SESSION['user']['email'] . '/');
 
 # Server
-$destination = $_SERVER['DOCUMENT_ROOT'] . "/2t/2307942949/VEF2A3U/userImg/" . $_SESSION['user']['email'] . '/';
+//$destination = $_SERVER['DOCUMENT_ROOT'] . "/2t/2307942949/VEF2A3U/userImg/" . $_SESSION['user']['email'] . '/';
 
 $makedir = false;
 $albumArray = scandir($destination);
+array_shift($albumArray);
+array_shift($albumArray);
+
 $error = "";
 
 
-if(isset($_POST['uploadFiles'])){
-	
-	require_once('includes/classes/Ps2/Upload.php');
+if(isset($_FILES['files']) && isset($_POST['action'])){
+
+	require_once('classes/Ps2/Upload.php');
 
 	try {
 		$valid = true;
 
-		$newFolder = trim($_POST['albumFolder']);
-
-		# Ef new folder text field er empty
-		if(empty($newFolder)){
-
-			# Ef það er engin albums til
-			if(count($albumArray) == 2){
-				$error = "You must create your first album";
-				$valid = false;
-				print $error;
-			}
-
-			# Nota albumið sem er selectað
-			elseif($_POST['albumlist'] != 'noalbums'){
-				$destination .= $_POST['albumlist'];
-			}
+		# Ef það er engin albums til
+		if(count($albumArray) == 2){
+			$error = "You must create your first album";
+			$valid = false;
+			print $error;
 		}
 
-		# Búa til nýtt album
-		else{
-			$destination .= $_POST['albumFolder'];
-			$makedir = true;
+		# Nota albumið sem er selectað
+		elseif($_POST['albumList']){
+			$destination .= $_POST['albumlist'];
 		}
 
 		# Uploada
 		if($valid){
 			$destination .= '/';
-
-			if($makedir){
-				if(!in_array($destination, $albumArray)){
-					mkdir($destination);
-				}
-			}
 
 			$upload = new Ps2_Upload($destination);
 			$upload->setMaxSize($max);
@@ -59,13 +49,53 @@ if(isset($_POST['uploadFiles'])){
 			$upload->move();
 
 			$result = $upload->getMessages();
+
+			echo $result;
 		}
 
-		
-		
 	} catch (Exception $e) {
 
 		echo $e->getMessages();
-		
+
 	}
+} 
+
+// Create new album
+if(isset($_POST['newAlbum'])){
+	$directory = $_POST['newAlbum'];
+	$result = false;
+	if(!in_array($directory, $albumArray)){
+		$result = mkdir($destination . $directory . '/');
+	}
+
+	if($result){
+		echo "success";
+	}
+	else{
+		echo "exists";
+	}
+
+}
+
+function listAlbums($directory){
+	$size = 8;
+
+	if(count($directory) < 8){
+		$size = count($directory);
+	}
+
+	if(!empty($directory)){
+		echo '<p class="albumListHeader">My albums</p>';
+		echo "<select name='albumList' class='albumList' size='$size'>";
+		foreach($directory as $folder){
+			if($folder != '.' && $folder != '..'){
+				echo '<option value="' . $folder . '">' . $folder . '</option>';
+			}
+		}
+		echo '</select>';
+	}
+	else{
+		echo '<p>No albums found.</p>';
+	}
+
 }

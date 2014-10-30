@@ -86,7 +86,7 @@ $( document ).ready(function() {
 
         var ajaxData = new FormData();
 
-        ajaxData.append('action', 'uploadForm');
+        ajaxData.append('action', 'uploadImages');
 
         $.each($("#files")[0].files, function(i, file){
         	ajaxData.append('files['+ i +']', file);
@@ -97,14 +97,16 @@ $( document ).ready(function() {
        		data: ajaxData,
        		cache: false,
        		contentType: false,
-       		processType: false,
        		processData: false,
        		type: 'POST',
-       		dataType: 'json',
        		success: function(data){
-       			if (data == 'success') {
-       				alert("UPLOADED");
-       			}
+       			alert(data);
+       			$('.uploadResults').append('<p></p>');
+       		},
+       		error: function(data){
+       			alert("error");
+       			alert(data);
+       			$('.uploadResults').append('<p></p>');
        		}
        });
 
@@ -122,5 +124,56 @@ $( document ).ready(function() {
 
         });*/
     });
-	
+
+	// Create new album button
+	$('.createAlbum').click(function(event){
+		event.preventDefault();
+		$('.createAlbumBox').slideToggle("slow", function(){
+			//Animation complete.
+		});
+	});
+
+	//Create a new album
+	$('.createAlbumSubmit').click(function(event){
+		event.preventDefault();
+		
+		var newAlbum = $('input[name="newAlbum"]').val();
+
+		var post_data = {'newAlbum':newAlbum};
+
+        $.post('includes/uploadImg.php', post_data, function(data){
+
+            //Success
+            if (data == "success") {
+                alert("Album created");
+
+                var albumList = $('.albumList'); // The album list
+                // If this isn't the first album, append it to the list
+                if(albumList.length){
+                	albumList.append("<option value='" + newAlbum + "'>" + newAlbum + "</option>");
+                	size = albumList.attr("size");
+
+                	//If there are less than 8, increment the size attribute
+                	if(size < 8){
+                		size++;
+                		albumList.attr("size", size);
+                	}
+                }
+
+                else{
+                	location.reload();
+                }
+            }
+            //Exists
+            else if(data == "exists"){
+            	alert("Album already exists");
+            }
+            //Error
+            else{
+            	alert(data);
+            }
+
+        });
+	});
+
 });

@@ -210,6 +210,18 @@
             {
                 die("Failed to run query: " . $ex->getMessage());
             }
+
+            // Create user directory
+            try
+            {
+                $path = getcwd() . "/userImg/" . $_POST['signupEmail'];
+
+                mkdir($path);
+            }
+            catch(PDOException $ex)
+            {
+                die("Failed to run query: " . $ex->getMessage());
+            }
             // --- END ---
 
             $success = true; 

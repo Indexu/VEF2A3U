@@ -1,5 +1,6 @@
 <?php
 require_once('totsekkidbcon/ekkidbcon.php');
+require('includes/uploadImg.php');
 include('includes/variables.php');
 include('includes/title.php');
 include('includes/randomImage.php');
@@ -26,13 +27,26 @@ include('includes/login.php');
 			<div class="medium-12 columns">
 
 				<form id="uploadForm" method="post" enctype="multipart/form-data" >
-					<div class="medium-2 columns">
+					<div class="medium-3 columns">
 						<h3>Upload Images</h3>
 						<input type="file" name="files[]" id="files" multiple />
+						<?php listAlbums($albumArray); ?>
+						<button class="createAlbum">Create a new album</button>
+
+						<div class="createAlbumBox">
+							<input type="text" placeholder="Album name" name="newAlbum" />
+							<button class="createAlbumSubmit">Create Album</button>
+						</div>
+
 						<input type="submit" name="uploadButton" id="uploadButton" class="button" value="Upload!" />
+
+						<div class="uploadResults">
+							
+						</div>
+
 					</div>
 
-					<div class="medium-10 columns">
+					<div class="medium-9 columns">
 						<output id="list">
 							<div class="row">
 								

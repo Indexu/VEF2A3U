@@ -1,6 +1,6 @@
 <?php
 
-require('totsekkidbcon/ekkidbcon.php');
+require('../totsekkidbcon/ekkidbcon.php');
 
 class Ps2_Upload {
 

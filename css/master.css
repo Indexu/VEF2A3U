@@ -307,6 +307,29 @@ body{
 
 #uploadButton{
 	margin-top: 2.5em;
+	width: 75%;
+}
+
+.albumList{
+	height: auto;
+	width: 75%;
+}
+
+.albumListHeader{
+	margin-bottom: -0.2em;
+}
+
+.createAlbum, .createAlbumSubmit{
+	width: 75%;
+	padding: 0.7em 0;
+}
+
+.createAlbumBox{
+	width: 75%;
+	display: none;
+}
+
+.createAlbumSubmit{
 	width: 100%;
 }
 
