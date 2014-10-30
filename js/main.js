@@ -43,41 +43,84 @@ $( document ).ready(function() {
 
 	// Handle files
 	function handleFileSelect(event){
-		// Stop prop and prevent default
-		event.stopPropagation();
-		event.preventDefault();
+		$('#list > .row').empty(); // Empty output
 
-		// Files
-		var files = event.dataTransfer.files;
+		var files = event.target.files; // The files
 
-		// Output
-		var output = [];
+		// Loop through files
+		for (var i = 0, f; f = files[i]; i++){
+			// Filter out anything but images
+			if(!f.type.match('image.*')){
+				continue;
+			}
 
-		for (var i = 0, f; f = files[i]; i++) {
-			output.push('<li><strong>', escape(f.name), '</strong> (',
-						f.type || 'n/a', ') - ',
-							f.size, ' bytes, last modified: ',
-							f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
-						'</li>');
+			var reader = new FileReader(); // FileReader
+
+			// Create a thumbnail for each image
+			reader.onload = (function(theFile){
+				return function(e){
+
+					// The thumbnail
+					var span = '<img class="uploadThumb" src="';
+					span = span.concat(e.target.result,
+									   '" title="',
+									   escape(theFile.name),
+									   '" />');
+
+					$('#list > .row').append(span); // Append the thumbnail
+				};
+			})(f);
+
+			// Read image
+			reader.readAsDataURL(f);
+
 		}
-
-		$('#list')[0].innerHTML = '<ul>' + output.join('') + '</ul>';
-
 	}
+	// Event listener
+	var inputFile = $('#files')[0];
+	inputFile.addEventListener('change', handleFileSelect, false);
 
-	// Drag n drop
-	function handleDragOver(event){
-		event.stopPropagation();
-		event.preventDefault();
-		event.dataTransfer.dropEffect = 'copy';
-	}
+	// Upload Button
+	$('#uploadButton').click(function(event){
+        event.preventDefault();
 
-	// The drop zone
-	var dropZone = $('#drop_zone')[0];
+        var ajaxData = new FormData();
 
-	// Listeners
-	dropZone.addEventListener('dragover', handleDragOver, false);
-	dropZone.addEventListener('drop', handleFileSelect, false);
+        ajaxData.append('action', 'uploadForm');
 
+        $.each($("#files")[0].files, function(i, file){
+        	ajaxData.append('files['+ i +']', file);
+        });
+
+       $.ajax({
+       		url: 'includes/uploadImg.php',
+       		data: ajaxData,
+       		cache: false,
+       		contentType: false,
+       		processType: false,
+       		processData: false,
+       		type: 'POST',
+       		dataType: 'json',
+       		success: function(data){
+       			if (data == 'success') {
+       				alert("UPLOADED");
+       			}
+       		}
+       });
+
+        /*var post_data = {'email':email, 'password':password, 'rememberme':rememberme};
+
+        $.post('core.php', post_data, function(data){
+
+            //Success
+            if (data == "success") {
+                $('.loadingGif').fadeOut('slow').queue(function() {
+                    window.location.replace("http://tsuts.tskoli.is/hopar/gru_h1/hive");
+                });
+
+            }
+
+        });*/
+    });
 	
 });

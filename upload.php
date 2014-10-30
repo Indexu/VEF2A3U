@@ -19,20 +19,30 @@ include('includes/login.php');
 </head>
 <body>
 
-	<?php include('includes/loggedInHeader.php'); ?>
+	<div class="wrapper">
+		<?php include('includes/loggedInHeader.php'); ?>
 
-	<div class="row firstRow">
-		<div class="medium-8 columns centered">
+		<div class="row firstRow">
+			<div class="medium-12 columns">
 
-			<form id="uploadForm" method="post" action="" enctype="multipart/form-data" >
-				<div class="large-6 columns">
-					<!--<input type="file" name="files[]" id="files" multiple />-->
-					<div id="drop_zone">Drop files here</div>
-				</div>
+				<form id="uploadForm" method="post" enctype="multipart/form-data" >
+					<div class="medium-2 columns">
+						<h3>Upload Images</h3>
+						<input type="file" name="files[]" id="files" multiple />
+						<input type="submit" name="uploadButton" id="uploadButton" class="button" value="Upload!" />
+					</div>
 
-				<output id="list"></output>
-			</form>
+					<div class="medium-10 columns">
+						<output id="list">
+							<div class="row">
+								
+							</div>
+						</output>
+					</div>
+					
+				</form>
 
+			</div>
 		</div>
 	</div>
 
