@@ -8,7 +8,7 @@ class Ps2_Upload {
 	protected $_destination;
 	protected $_max = 51200;
 	protected $_messages = array();
-	protected $_permitted = array('images/gif',
+	protected $_permitted = array('image/gif',
 								  'image/jpeg',
 								  'image/pjpeg',
 								  'image/png');
@@ -113,8 +113,25 @@ class Ps2_Upload {
         }
         # Ef ekki til
         else{
+        	$finfo = finfo_open();
+        	$imgType = finfo_file($finfo, $image, FILEINFO_MIME);
+        	finfo_close($finfo);
 
-        	$exifData = exif_read_data($image);
+        	$imgType = explode(";", $imgType);
+        	$imgType = $imgType[0];
+
+        	if($imgType == "image/jpeg" || $imgType == "image/pjpeg"){
+        		$exifData = exif_read_data($image);
+        	}
+        	else{
+        		list($width, $height) = getimagesize($image);
+
+        		$exifData['FileName'] = basename($image);
+        		$exifData['FileSize'] = filesize($image);
+        		$exifData['MimeType'] = $imgType;
+        		$exifData['COMPUTED']['Height'] = $height;
+        		$exifData['COMPUTED']['Width'] = $width;
+        	}
 
             $query = "
                 INSERT INTO userimages (

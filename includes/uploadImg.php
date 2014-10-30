@@ -27,7 +27,7 @@ if(isset($_FILES['files']) && isset($_POST['action'])){
 		$valid = true;
 
 		# Ef það er engin albums til
-		if(count($albumArray) == 2){
+		if(count($albumArray) == 0){
 			$error = "You must create your first album";
 			$valid = false;
 			print $error;
@@ -35,7 +35,7 @@ if(isset($_FILES['files']) && isset($_POST['action'])){
 
 		# Nota albumið sem er selectað
 		elseif($_POST['albumList']){
-			$destination .= $_POST['albumlist'];
+			$destination .= $_POST['albumList'];
 		}
 
 		# Uploada
@@ -50,7 +50,7 @@ if(isset($_FILES['files']) && isset($_POST['action'])){
 
 			$result = $upload->getMessages();
 
-			echo $result;
+			echo json_encode($result);
 		}
 
 	} catch (Exception $e) {

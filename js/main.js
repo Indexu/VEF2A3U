@@ -84,9 +84,21 @@ $( document ).ready(function() {
 	$('#uploadButton').click(function(event){
         event.preventDefault();
 
+        $('.uploadResults').empty();
+
         var ajaxData = new FormData();
 
         ajaxData.append('action', 'uploadImages');
+
+        var album = $('.albumList').val();
+
+        if(album){
+        	ajaxData.append('albumList', album);
+        }
+
+        else{
+        	alert("Create an album");
+        }
 
         $.each($("#files")[0].files, function(i, file){
         	ajaxData.append('files['+ i +']', file);
@@ -100,8 +112,23 @@ $( document ).ready(function() {
        		processData: false,
        		type: 'POST',
        		success: function(data){
-       			alert(data);
-       			$('.uploadResults').append('<p></p>');
+       			if(data.charAt(0) == '['){
+	       			messages = JSON.parse(data);
+	       			$('.uploadResults').append('<ul></ul>');
+	       			for (var i = 0; i < messages.length; i++) {
+	       				$('.uploadResults > ul').append('<li>' + messages[i] + '</li>');
+	       			}
+       			}
+       			else{
+       				if(data.indexOf("POST Content-Length") != -1){
+       					$('.uploadResults').append("The ammount of data you are trying to submit in one go is too much.<br >Try sending the data in smaller batches.");
+       				}
+       				else{
+       					$('.uploadResults').append('<p>' + data + '</p>');
+       				}
+       				
+       			}
+       			
        		},
        		error: function(data){
        			alert("error");

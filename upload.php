@@ -41,7 +41,9 @@ include('includes/login.php');
 						<input type="submit" name="uploadButton" id="uploadButton" class="button" value="Upload!" />
 
 						<div class="uploadResults">
-							
+							<ul>
+								
+							</ul>
 						</div>
 
 					</div>
