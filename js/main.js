@@ -77,8 +77,11 @@ $( document ).ready(function() {
 		}
 	}
 	// Event listener
-	var inputFile = $('#files')[0];
-	inputFile.addEventListener('change', handleFileSelect, false);
+	var inputFile = $('#files');
+
+	if(inputFile.length){
+		inputFile[0].addEventListener('change', handleFileSelect, false);
+	}
 
 	// Upload Button
 	$('#uploadButton').click(function(event){
@@ -203,4 +206,11 @@ $( document ).ready(function() {
         });
 	});
 
+	// =========SLICK============
+	$('.featuredSlide').slick({
+	  autoplay: true,
+	  autoplaySpeed: 3000,
+	  speed: 600
+	});
+	
 });

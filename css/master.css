@@ -37,6 +37,7 @@ body{
 }
 
 .row{
+	color: white;
 	max-width: 100%;
 }
 
@@ -341,6 +342,26 @@ body{
 
 .uploadResults > ul{
 	list-style-type: square;
+}
+
+/* -- Slick -- */
+.featuredSlide{
+	margin-top: 1em;
+	background-color: rgba(0,0,0,0.2);
+	border-radius: 0.5em;
+}
+
+.slideImg{
+	height: 30em;
+	background-size: contain;
+	background-repeat:no-repeat;
+	background-position: center;
+}
+
+.slideImg > a{
+	display: block;
+	height: 100%;
+	width: 100%;
 }
 
 

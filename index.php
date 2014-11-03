@@ -14,6 +14,7 @@ include('includes/login.php');
 	<title>Armada<?php if(isset($title)){echo "&#8212;$title"; }?></title>
 	<link rel="stylesheet" href="css/foundation.css" />
 	<link rel="stylesheet" href="foundation-icons/foundation-icons.css" />
+	<link rel="stylesheet" type="text/css" href="slick/slick.css"/>
 	<link rel="stylesheet" href="css/master.css" />
 	<!--<script src="js/vendor/modernizr.js"></script>-->
 </head>
@@ -42,6 +43,7 @@ include('includes/login.php');
 
 	<script src="js/vendor/jquery.js"></script>
 	<script src="js/foundation.min.js"></script>
+	<script type="text/javascript" src="slick/slick.min.js"></script>
 	<script>
 		$(document).foundation();
 	</script>

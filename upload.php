@@ -5,6 +5,13 @@ include('includes/variables.php');
 include('includes/title.php');
 include('includes/randomImage.php');
 include('includes/login.php');
+
+// If not logged in, go to index page
+if(!check_login()){
+	header('Location: index.php');
+	die();
+}
+
 ?>
 
 <!doctype html>
