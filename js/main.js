@@ -206,6 +206,27 @@ $( document ).ready(function() {
         });
 	});
 
+	// =======MY PHOTOS==========
+	$('.albumListPhotos').change(function(){
+		$('.imageList').empty();
+		var album = $(this).val();
+
+		var post_data = {'album':album};
+
+        $.post('includes/gallery.php', post_data, function(data){
+
+            obj = JSON.parse(data);
+
+            for(img in obj){
+            	$('.imageList').append("<img src='" + obj[img].url + "' />");
+            }
+
+
+            
+
+        });
+	});
+
 	// =========SLICK============
 	$('.featuredSlide').slick({
 	  autoplay: true,

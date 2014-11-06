@@ -55,7 +55,7 @@ if(isset($_FILES['files']) && isset($_POST['action'])){
 
 	} catch (Exception $e) {
 
-		echo $e->getMessages();
+		echo $e;
 
 	}
 } 

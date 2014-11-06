@@ -155,10 +155,12 @@ class Ps2_Upload {
                 )
             ";
 
+            $url = explode("VEF2A3U/", $this->_destination);
+
             $query_params = array(
             	':userID' => $_SESSION['user']['userID'],
             	':albumID' => $this->_album,
-            	':url' => $this->_destination . $exifData['FileName'],
+            	':url' => $url[1] . $exifData['FileName'],
                 ':fileName' => $exifData['FileName'],
                 ':fileSize' => $exifData['FileSize'],
                 ':mime' => $exifData['MimeType'],

@@ -344,6 +344,22 @@ body{
 	list-style-type: square;
 }
 
+/* -- My Photos -- */
+.albumListContainer{
+	border-right: 1px solid white;
+	min-height: 100%;
+}
+
+.albumListContainer > h3{
+	margin-top: 0.5em;
+	color: rgb(240,240,240);
+	text-align: center;
+}
+
+.albumListPhotos{
+	height: auto;
+}
+
 /* -- Slick -- */
 .featuredSlide{
 	margin-top: 1em;
