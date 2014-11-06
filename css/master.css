@@ -287,6 +287,28 @@ body{
 	padding: 0.3em 0;
 }
 
+/* -- Front Page Logged In -- */
+/*Featured Images & Albums*/
+.featuredTitle > h3{
+	color: rgb(255,255,255);
+	text-align: center;
+}
+
+.featuredImage, .featuredAlbum{
+	display: block;
+	height: 6em;
+	background-color: rgba(150,150,150,0.4);
+	margin-bottom: 1em;
+}
+
+.featuredImage div > div > img, .featuredAlbum div > div > img{
+	max-height: 6em;
+	margin-left: -1em;
+}
+
+.albumsMargin{
+	margin-left: 3em;
+}
 
 /* -- Upload -- */
 #uploadForm{
@@ -359,6 +381,68 @@ body{
 .albumListPhotos{
 	height: auto;
 }
+
+/*CREDIT: http://stackoverflow.com/questions/20059362/make-image-or-div-slide-up-or-down-when-hovering-parent-div*/
+.thumbnailContainer{
+	margin-top: 1em;
+	position: relative;
+	overflow: hidden;
+	height: 14em;
+	background-color: rgba(0,0,0,0.3);
+	border: 2px solid rgba(100,100,100,0.5);
+	border-radius: 0.3em;
+}
+
+.thumbnailPhoto{
+	/*CREDIT: http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/*/
+	position: relative;
+  	top: 50%;
+  	transform: translateY(-50%);
+}
+
+.infoPhoto{
+	position: absolute;
+	top: -20%;
+	width: 100%;
+	background: rgba(0,0,0,0.4);
+	text-align: center;
+	transition: top 0.1s ease-in-out;
+	left: 0;
+	color: rgb(255,255,255);
+	text-decoration: none;
+	z-index: 1;
+}
+
+.optionsPhoto{
+	position: absolute;
+	top: 100%;
+	width: 100%;
+	background: rgba(0,0,0,0.4);
+	text-align: center;
+	transition: top 0.1s ease-in-out;
+	left: 0;
+	color: rgb(255,255,255);
+	text-decoration: none;
+}
+
+.optionsPhoto > a{
+	color: rgb(255,255,255);
+	text-decoration: none;
+}
+
+.infoPhoto, .optionsPhoto{
+	font-family: calibri;
+}
+
+.thumbnailContainer:hover .infoPhoto{
+	top: 0;
+
+}
+
+.thumbnailContainer:hover .optionsPhoto{
+	top: 89.5%;
+}
+
 
 /* -- Slick -- */
 .featuredSlide{

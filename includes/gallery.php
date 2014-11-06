@@ -10,8 +10,9 @@ require('../totsekkidbcon/ekkidbcon.php');
 if(isset($_POST['album'])){
 
 	$query = "
-	SELECT * FROM userimages
+	SELECT *, users.email AS email, useralbums.albumTitle AS albumTitle FROM userimages
 	INNER JOIN useralbums ON (userimages.albumID=useralbums.id)
+	INNER JOIN users ON (userimages.userID=users.userID)
 	WHERE useralbums.albumTitle = :album
 	";
 

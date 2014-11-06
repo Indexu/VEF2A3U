@@ -158,7 +158,7 @@ $( document ).ready(function() {
 	// Create new album button
 	$('.createAlbum').click(function(event){
 		event.preventDefault();
-		$('.createAlbumBox').slideToggle("slow", function(){
+		$('.createAlbumBox').slideToggle(250, function(){
 			//Animation complete.
 		});
 	});
@@ -207,8 +207,10 @@ $( document ).ready(function() {
 	});
 
 	// =======MY PHOTOS==========
-	$('.albumListPhotos').change(function(){
-		$('.imageList').empty();
+	$('.albumListPhotos').click(function(){
+		var imageList = $('.imageList');
+		imageList.empty();
+
 		var album = $(this).val();
 
 		var post_data = {'album':album};
@@ -216,11 +218,21 @@ $( document ).ready(function() {
         $.post('includes/gallery.php', post_data, function(data){
 
             obj = JSON.parse(data);
-
             for(img in obj){
-            	$('.imageList').append("<img src='" + obj[img].url + "' />");
-            }
+            	if(img % 4 == 0){
+            		imageList.append("<div class='row'>");
+            	}
 
+            	imageList.append("<div class='medium-3 columns thumbnailContainer'>\
+            		<div class='infoPhoto'>" + obj[img].fileName + " | " + obj[img].height + "x" + obj[img].width + "</div>\
+            		<img class='thumbnailPhoto' src='" + obj[img].url + "' />\
+            		<div class='optionsPhoto'><a href='includes/downloadImage.php?file=" + obj[img].fileName + "&album=" + obj[img].albumTitle + "&user=" + obj[img].email + "'>Download</a></div>\
+            		</div>");
+
+            	if(img % 4 == 0){
+            		imageList.append("</div>");
+            	}
+            }
 
             
 
