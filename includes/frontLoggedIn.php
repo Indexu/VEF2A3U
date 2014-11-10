@@ -40,7 +40,7 @@
 					echo '<a class="medium-12 columns featuredAlbum" href="#">
 						<div class="row">
 							<div class="medium-5 columns">
-								<img src="userImg/faggotlordinn@faggot.com/Wallpapers/wallpaper-2492652.jpg" >
+								<img src="img/album.png" >
 							</div>
 							<div class="medium-7 columns">
 								<p>Title: '.$featuredAlbums[$i]['albumTitle'].'</p>
@@ -107,7 +107,7 @@
 					echo '<a class="medium-12 columns featuredAlbum" href="#">
 						<div class="row">
 							<div class="medium-5 columns">
-								<img src="userImg/faggotlordinn@faggot.com/Wallpapers/wallpaper-2492652.jpg" >
+								<img src="img/album.png" >
 							</div>
 							<div class="medium-7 columns">
 								<p>Title: '.$featuredAlbums[$i]['albumTitle'].'</p>

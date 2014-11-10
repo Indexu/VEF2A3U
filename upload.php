@@ -5,6 +5,7 @@ include('includes/variables.php');
 include('includes/title.php');
 include('includes/randomImage.php');
 include('includes/login.php');
+include('includes/sessionTimeout.php');
 
 // If not logged in, go to index page
 if(!check_login()){

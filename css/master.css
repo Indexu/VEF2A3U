@@ -301,9 +301,13 @@ body{
 	margin-bottom: 1em;
 }
 
-.featuredImage div > div > img, .featuredAlbum div > div > img{
+.featuredImage div > div > img{
 	max-height: 6em;
 	margin-left: -1em;
+}
+
+.featuredAlbum div > div > img{
+	max-height: 6em;
 }
 
 .albumsMargin{

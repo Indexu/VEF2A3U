@@ -56,6 +56,7 @@
             unset($row['password']);
 
             $_SESSION['user'] = $row;
+            $_SESSION['timeout'] = time();
 
             header("Location: index.php");
             die("Redirecting to front page"); 

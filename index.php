@@ -4,6 +4,7 @@ include('includes/variables.php');
 include('includes/title.php');
 include('includes/randomImage.php');
 include('includes/login.php');
+include('includes/sessionTimeout.php');
 ?>
 
 <!doctype html>
